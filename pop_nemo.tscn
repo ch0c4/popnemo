@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxpkufs4bqv7r"]
+
+[ext_resource type="Script" path="res://pop_nemo.gd" id="1_uw7yn"]
+[ext_resource type="Texture2D" uid="uid://cwwfk15m4qs2i" path="res://popnemo-spritesheet-224-112.png" id="2_ucmjq"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_ensif"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa2rk"]
+atlas = ExtResource("2_ucmjq")
+region = Rect2(0, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf3x0"]
+atlas = ExtResource("2_ucmjq")
+region = Rect2(112, 0, 112, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26blh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa2rk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf3x0")
+}],
+"loop": false,
+"name": &"talk",
+"speed": 5.0
+}]
+
+[node name="PopNemo" type="Node"]
+script = ExtResource("1_uw7yn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_ensif")
+autoplay = true
+
+[node name="PopNemo" type="AnimatedSprite2D" parent="."]
+position = Vector2(56, 56)
+sprite_frames = SubResource("SpriteFrames_26blh")
+animation = &"talk"
